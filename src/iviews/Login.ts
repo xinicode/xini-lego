@@ -8,6 +8,9 @@ export default defineComponent({
   components: {
     UserOutlined
   },
+  props: {
+    list: [],
+  },
   setup() {
     const formRef = ref();
     const formState = reactive({

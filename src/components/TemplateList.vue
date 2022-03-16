@@ -40,9 +40,10 @@ export default defineComponent({
   props: {
     list: [],
   },
-  setup() {
+  setup(list) {
     onMounted(() => {
-      console.log("this.props");
+
+      console.log(list);
     });
     return {};
   },

@@ -2,7 +2,7 @@
   <div class="content-container">
     <a-row :gutter="16">
       <a-col :span="24">
-       <template-list :list="testData"></template-list>
+        <template-list :list="testData"></template-list>
       </a-col>
     </a-row>
     <a-row type="flex" justify="center">
@@ -18,115 +18,36 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, toRefs, ref ,reactive} from "vue";
+import { defineComponent, toRefs, computed, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import TemplateList from '../components/TemplateList.vue';
+import { useStore } from "vuex";
+import TemplateList from "../components/TemplateList.vue";
+import {GlobalDataProps} from '../store/index';
 export default defineComponent({
   name: "Index",
-  components:{
-    'template-list': TemplateList,
+  components: {
+    "template-list": TemplateList,
   },
   setup() {
     const router = useRouter();
+    const store = useStore<GlobalDataProps>();
     const isLoading = ref(false);
     const isLastPage = ref(false);
     const msg = "123";
     const user = ref("cccc");
+
+    const testData = computed(() => store.state.templates.data);
     const onClick = () => {
       router.push("/works");
     };
-    const testData = [
-      {
-       id: '123',
-        props: 'PageProps',
-        title: "string",
-        desc: "string",
-        coverImg: "string",
-        uuid: "string",
-        setting: { key: "string]: any" },
-        isTemplate: true,
-        isHot: true,
-        isNew: true,
-        author: true,
-        copiedCount: 123,
-        status: true,
-        user : {
-          gender: "true",
-          nickName: "string",
-          picture: "string",
-          userName: "string",
-        },
-      },
-      {
-       id: '123',
-        props: 'PageProps',
-        title: "string",
-        desc: "string",
-        coverImg: "string",
-        uuid: "string",
-        setting: { key: "string]: any" },
-        isTemplate: true,
-        isHot: true,
-        isNew: true,
-        author: true,
-        copiedCount: 123,
-        status: true,
-        user : {
-          gender: "true",
-          nickName: "string",
-          picture: "string",
-          userName: "string",
-        },
-      },
-      {
-       id: '123',
-        props: 'PageProps',
-        title: "string",
-        desc: "string",
-        coverImg: "string",
-        uuid: "string",
-        setting: { key: "string]: any" },
-        isTemplate: true,
-        isHot: true,
-        isNew: true,
-        author: true,
-        copiedCount: 123,
-        status: true,
-        user : {
-          gender: "true",
-          nickName: "string",
-          picture: "string",
-          userName: "string",
-        },
-      },
-      {
-       id: '123',
-        props: 'PageProps',
-        title: "string",
-        desc: "string",
-        coverImg: "string",
-        uuid: "string",
-        setting: { key: "string]: any" },
-        isTemplate: true,
-        isHot: true,
-        isNew: true,
-        author: true,
-        copiedCount: 123,
-        status: true,
-        user : {
-          gender: "true",
-          nickName: "string",
-          picture: "string",
-          userName: "string",
-        },
-      }
-    ];
     const loadMorePage = () => {
-      console.log(testData);
+      // console.log(testData);
       // isLoading.value = true;
     };
     return {
-      msg,isLastPage,isLoading,
+      msg,
+      isLastPage,
+      isLoading,
       user,
       onClick,
       testData,

@@ -12,7 +12,12 @@ const router = createRouter({
       name: 'Index',
       component: Index,
       children: [
-        { path: '', name: 'home', component: Home, meta: { title: '欢迎' } },
+        {
+          path: '',
+          name: 'home',
+          component: Home,
+          meta: { title: '欢迎',withHeader: true }
+        },
         { path: 'template/:id', name: 'template', component: TemplateDetail, meta: { title: '模板' } },
         { path: 'works', name: 'works', component: Works, meta: { title: 'works' } },
       ]
@@ -21,7 +26,7 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       meta: {
-        redirectAlreadyLogin: true, title: '登录到', disableLoading: true
+        redirectAlreadyLogin: true, withHeader: false, title: '登录到', disableLoading: true
       },
       component: Login
       // component: () => import(/* webpackChunkName: "login" */ '../iviews/Login.vue')
@@ -34,7 +39,7 @@ router.beforeEach(async (to, from) => {
   // if (title) {
   //   document.title = title;
   // }
-  console.log(title);
-  console.log(title2);
+  // console.log(title);
+  // console.log(title2);
 });
 export default router;
