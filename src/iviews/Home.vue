@@ -37,6 +37,7 @@ export default defineComponent({
     const user = ref("cccc");
 
     const testData = computed(() => store.state.templates.data);
+    console.log('testData: ', testData);
     const onClick = () => {
       router.push("/works");
     };

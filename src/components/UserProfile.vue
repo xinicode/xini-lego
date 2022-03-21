@@ -32,7 +32,7 @@ export default defineComponent({
     const user = computed(() => store.state.user);
     console.log('user: ', user);
     const createDesign = () => {
-      console.log("a");
+      router.push("/editor");
     };
     const logout = () => {
       store.commit("logout");

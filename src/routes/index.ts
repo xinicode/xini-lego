@@ -4,6 +4,7 @@ import Home from '../iviews/Home.vue';
 import TemplateDetail from '../iviews/TemplateDetail.vue';
 import Works from '../iviews/Works.vue';
 import Login from '../iviews/Login.vue';
+import Editor from '../iviews/Editor.vue';
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -29,6 +30,15 @@ const router = createRouter({
         redirectAlreadyLogin: true, withHeader: false, title: '登录到', disableLoading: true
       },
       component: Login
+      // component: () => import(/* webpackChunkName: "login" */ '../iviews/Login.vue')
+    },
+    {
+      path: '/editor',
+      name: 'editor',
+      meta: {
+        redirectAlreadyLogin: true, withHeader: false, title: '登录到', disableLoading: true
+      },
+      component: Editor
       // component: () => import(/* webpackChunkName: "login" */ '../iviews/Login.vue')
     }
   ],
