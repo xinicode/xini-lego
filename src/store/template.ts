@@ -14,56 +14,56 @@ export interface TemplateProps {
 const testData: TemplateProps[] = [
   {
     id: '123',
-    title: "npm startAA",
-    coverImg: "string",
-    author: "true",
+    title: 'npm startAA',
+    coverImg: 'assets/img.png',
+    author: 'true',
     copiedCount: 123,
     user: {
-      gender: "true",
-      nickName: "string",
-      picture: "string",
-      userName: "string",
+      gender: 'true',
+      nickName: 'string',
+      picture: 'string',
+      userName: 'string',
     },
   },
   {
     id: '123',
-    title: "string",
-    coverImg: "string",
-    author: "true",
+    title: 'string',
+    coverImg: 'img.png',
+    author: 'true',
     copiedCount: 123,
     user: {
-      gender: "true",
-      nickName: "string",
-      picture: "string",
-      userName: "string",
+      gender: 'true',
+      nickName: 'string',
+      picture: 'string',
+      userName: 'string',
     },
   },
   {
     id: '123',
-    title: "string",
-    coverImg: "string",
-    author: "true",
+    title: 'string',
+    coverImg: 'img.png',
+    author: 'true',
     copiedCount: 123,
     user: {
-      gender: "true",
-      nickName: "string",
-      picture: "string",
-      userName: "string",
+      gender: 'true',
+      nickName: 'string',
+      picture: 'string',
+      userName: 'string',
     },
   },
   {
     id: '123',
-    title: "string",
-    coverImg: "string",
-    author: "true",
+    title: 'string',
+    coverImg: 'img.png',
+    author: 'true',
     copiedCount: 123,
     user: {
-      gender: "true",
-      nickName: "string",
-      picture: "string",
-      userName: "string",
-    }
-  }
+      gender: 'true',
+      nickName: 'string',
+      picture: 'string',
+      userName: 'string',
+    },
+  },
 ];
 
 export interface TemplatesProps {
@@ -72,8 +72,8 @@ export interface TemplatesProps {
 
 const templates: Module<TemplatesProps, GlobalDataProps> = {
   state: {
-    data: testData
-  }
+    data: testData,
+  },
 };
 
 export default templates;

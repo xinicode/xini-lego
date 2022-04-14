@@ -18,33 +18,34 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, toRefs, computed, ref, reactive } from "vue";
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import TemplateList from "../components/TemplateList.vue";
-import {GlobalDataProps} from '../store/index';
+import { defineComponent, toRefs, computed, ref, reactive, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import TemplateList from '../components/TemplateList.vue';
+import { GlobalDataProps } from '../store/index';
 export default defineComponent({
-  name: "Index",
+  name: 'Index',
   components: {
-    "template-list": TemplateList,
+    'template-list': TemplateList,
   },
   setup() {
     const router = useRouter();
     const store = useStore<GlobalDataProps>();
     const isLoading = ref(false);
     const isLastPage = ref(false);
-    const msg = "123";
-    const user = ref("cccc");
-
+    const msg = '123';
+    const user = ref('cccc');
     const testData = computed(() => store.state.templates.data);
-    console.log('testData: ', testData);
     const onClick = () => {
-      router.push("/works");
+      router.push('/works');
     };
     const loadMorePage = () => {
-      // console.log(testData);
+      console.log('cuihao');
       // isLoading.value = true;
     };
+    onMounted(() => {
+      console.log('cuihao');
+    });
     return {
       msg,
       isLastPage,

@@ -11,7 +11,7 @@
                 v-else
               />
               <div class="hover-item">
-                <a-button size="large"  type="primary">使用该模版创建</a-button>
+                <a-button size="large" type="primary">使用该模版创建</a-button>
               </div>
             </template>
             <a-card-meta :title="item.title">
@@ -33,20 +33,14 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent,onMounted } from "vue";
+import { defineComponent } from 'vue';
 export default defineComponent({
-  name: "TemplateList",
+  name: 'TemplateList',
   props: {
     list: [],
   },
-  setup(list) {
-
-    onMounted(() => {
-
-      console.log(list);
-    });
-    return {
-    };
+  setup() {
+    return {};
   },
 });
 </script>

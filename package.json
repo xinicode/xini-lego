@@ -6,13 +6,16 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
+    "inspect": "vue-cli-service inspect",
     "lint": "vue-cli-service lint",
-    "start": "npm run serve"
+    "start": "npm run serve",
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "@fly-vue/ui-designer": "1.5.0-snapshot",
     "ant-design-vue": "^2.2.8",
     "core-js": "^3.6.5",
+    "mitt": "^3.0.0",
     "uuid": "^8.3.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.13",
@@ -33,12 +36,18 @@
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.1",
     "babel-jest": "^27.0.6",
+    "compression-webpack-plugin": "^5.0.1",
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^7.0.0-0",
+    "file-loader": "^6.2.0",
+    "image-webpack-loader": "^8.1.0",
     "jest": "^27.5.1",
+    "lodash": "^4.17.21",
+    "prettier": "^2.6.2",
     "ts-jest": "^27.0.4",
-    "typescript": "~4.3.5"
+    "typescript": "~4.3.5",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   }
 }

@@ -1,7 +1,3 @@
-
-
-
-
 import { Module } from 'vuex';
 
 import { GlobalDataProps } from './index';
@@ -11,17 +7,16 @@ export interface UserProps {
   userName: string;
 }
 
-
 const user: Module<UserProps, GlobalDataProps> = {
   mutations: {
     login(state) {
       state.isLogin = true;
-      state.userName = "xini";
+      state.userName = 'xini';
     },
     logout(state) {
       state.isLogin = false;
-    }
-  }
+    },
+  },
 };
 
 export default user;

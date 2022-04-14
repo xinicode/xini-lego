@@ -1,44 +1,73 @@
 module.exports = {
   root: true,
-
   env: {
-    node: true
+    node: true,
   },
-
-  'extends': [
+  extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
-    '@vue/typescript/recommended'
+    '@vue/typescript/recommended',
+    'prettier',
   ],
-
-  parserOptions: {
-    ecmaVersion: 2020
+  plugins: ['@typescript-eslint'],
+  rules: {
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/camelcase': 0,
+    '@typescript-eslint/no-this-alias': [
+      'error',
+      {
+        allowDestructuring: true,
+        allowedNames: ['self'],
+      },
+    ],
+    // indent: [2, 4, { SwitchCase: 1 }],
+    'linebreak-style': [0, 'error', 'windows', 'unix'],
+    quotes: [2, 'single'],
+    'no-caller': 2,
+    semi: ['error', 'always'],
+    'no-multiple-empty-lines': [2, { max: 2 }],
+    'no-console': 0,
+    'no-constant-condition': 2,
+    'no-extra-parens': 2,
+    'no-extra-semi': 2,
+    'no-func-assign': 2,
+    'no-mixed-spaces-and-tabs': [2, false],
+    'no-trailing-spaces': 1,
+    camelcase: 0,
+    'comma-dangle': [0, 'never'],
+    'consistent-this': [2, 'self'],
+    'no-multi-spaces': 1,
+    'no-multi-str': 2,
+    'no-redeclare': 2,
+    'no-undef': 0,
+    'no-sparse-arrays': 2,
+    'no-unreachable': 2,
+    'no-unused-expressions': 2,
+    'no-unused-vars': [1, { vars: 'all', args: 'after-used' }],
+    'no-use-before-define': 2,
+    'no-extra-boolean-cast': 2,
+    'no-void': 2,
+    'no-var': 2,
+    'brace-style': [1, '1tbs'],
+    'arrow-spacing': 0,
+    'comma-spacing': [2, { before: false, after: true }],
+    'comma-style': [2, 'last'],
+    curly: [2, 'all'],
+    'default-case': 2,
+    'dot-notation': [0, { allowKeywords: true }],
+    eqeqeq: 2,
+    'generator-star-spacing': 0,
+    'init-declarations': 2,
+    'key-spacing': [2, { beforeColon: false, afterColon: true }],
+    'newline-after-var': 0,
+    'id-match': 0,
+    'semi-spacing': [0, { before: false, after: true }],
+    'sort-vars': 0,
+    'space-before-function-paren': [0, 'always'],
+    strict: 2,
+    'use-isnan': 2,
+    'valid-typeof': 2,
+    'no-useless-escape': 2,
+    'require-atomic-updates': 'off',
   },
-
-  rules: { 
-    'semi': 2,
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
-  },
-
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
-      ],
-      env: {
-        jest: true
-      }
-    },
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
-      ],
-      env: {
-        jest: true
-      }
-    }
-  ]
 };
