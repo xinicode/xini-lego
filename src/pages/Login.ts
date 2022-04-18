@@ -1,43 +1,47 @@
-import { defineComponent, reactive, ref, toRaw } from 'vue';
+import router from '@/router';
 import { UserOutlined } from '@ant-design/icons-vue';
-import { ValidateErrorEntity } from 'ant-design-vue/lib/form/interface';
-
-
+import { defineComponent, reactive, ref } from 'vue';
+import { useStore } from 'vuex';
 export default defineComponent({
-  name: "login",
+  name: 'login',
   components: {
-    UserOutlined
+    UserOutlined,
   },
   props: {
     list: [],
   },
   setup() {
+    const store = useStore();
     const formRef = ref();
     const formState = reactive({
-      cellphone: "",
-      cellphone2: "",
+      cellphone: '',
+      cellphone2: '',
     });
     const login = () => {
-      console.log(formState);
-      formRef.value.validate().then(() => {
-        console.log(toRaw(formState));
-      }).catch((error: ValidateErrorEntity) => {
-        console.log(error);
-      });
+      // console.log(formState);
+      // formRef.value.validate().then(() => {
+      //   console.log(toRaw(formState));
+      // }).catch((error: ValidateErrorEntity) => {
+      //   console.log(error);
+      // });
+      localStorage.setItem('USERTOKEN', 'bG9jYWw6NWU5NmQzYmMtYjlkYy00OWVlLWIxZGUtNzAwNWY5N2U5YzY4');
+      store.commit('login');
+      router.push('/');
+      console.log('a');
     };
     const resetForm = () => {
       formRef.value.resetFields();
     };
     const rules = {
-      cellphone: [
-        { required: true, message: "不能为空", trigger: 'blur' }
-      ],
-      cellphone2: [
-        { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
-      ]
+      cellphone: [{ required: true, message: '不能为空', trigger: 'blur' }],
+      cellphone2: [{ min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }],
     };
     return {
-      formState, login, formRef, resetForm, rules
+      formState,
+      login,
+      formRef,
+      resetForm,
+      rules,
     };
-  }
+  },
 });

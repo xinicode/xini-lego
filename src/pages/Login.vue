@@ -4,7 +4,7 @@
       <a-col :span="12" class="aside">
         <div class="aside-inner">
           <router-link to="/">
-            <img alt="细腻lego" src="../assets/img.png"  class="logo-img" />
+            <img alt="细腻lego" src="@/assets/img.png" class="logo-img" />
           </router-link>
           <h2>工具</h2>
           <span class="text-white-70">test</span>
@@ -18,17 +18,17 @@
           :label-col="labelCol"
           :wrapper-col="wrapperCol"
         >
-          <a-form-item label="手机号码"  name="cellphone">
+          <a-form-item label="手机号码" name="cellphone">
             <a-input placeholder="phone number" v-model:value="formState.cellphone">
               <template v-slot:prefix>
-                <UserOutlined style="color:red" />
+                <UserOutlined style="color: red" />
               </template>
             </a-input>
           </a-form-item>
-           <a-form-item label="手机号码2"  name="cellphone2">
+          <a-form-item label="手机号码2" name="cellphone2">
             <a-input placeholder="phone number" v-model:value="formState.cellphone2">
               <template v-slot:prefix>
-                <UserOutlined style="color:red" />
+                <UserOutlined style="color: red" />
               </template>
             </a-input>
           </a-form-item>

@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "inspect": "vue-cli-service inspect",
     "lint": "vue-cli-service lint",
-    "start": "npm run serve",
-    "prettier": "prettier --write ."
+    "inspect": "vue-cli-service inspect",
+    "pack": "vue-cli-service build",
+    "prettier": "prettier --write .",
+    "start": "npm run serve"
   },
   "dependencies": {
     "@fly-vue/ui-designer": "1.5.0-snapshot",
@@ -46,8 +46,10 @@
     "jest": "^27.5.1",
     "lodash": "^4.17.21",
     "prettier": "^2.6.2",
+    "style-resources-loader": "^1.4.1",
     "ts-jest": "^27.0.4",
     "typescript": "~4.3.5",
-    "uglifyjs-webpack-plugin": "^2.2.0"
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "vue-cli-plugin-style-resources-loader": "~0.1.5"
   }
 }

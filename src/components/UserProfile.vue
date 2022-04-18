@@ -16,10 +16,10 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, computed, reactive } from 'vue';
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
+import { computed, defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 export default defineComponent({
   name: 'UserProfile',
   setup() {
@@ -38,8 +38,7 @@ export default defineComponent({
       }, 2000);
     };
     const login = () => {
-      localStorage.setItem('USERTOKEN', 'bG9jYWw6NWU5NmQzYmMtYjlkYy00OWVlLWIxZGUtNzAwNWY5N2U5YzY4');
-      store.commit('login');
+      router.push('/login');
     };
 
     return {

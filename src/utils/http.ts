@@ -1,11 +1,11 @@
-import axios from "./request";
+import axios from './request';
 
-export function formPost(url:any, data:any) {
+export function formPost(url: any, data: any) {
   return new Promise((resolve, reject) => {
     axios({
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
       url: url,
       data: data,
@@ -19,7 +19,7 @@ export function formPost(url:any, data:any) {
   });
 }
 
-export function resPost(url:any,query:any,data:any) {
+export function resPost(url: any, query: any, data: any) {
     return new Promise((resolve, reject) => {
         axios({
             method: 'POST',
@@ -30,9 +30,9 @@ export function resPost(url:any,query:any,data:any) {
             params: query,
             data,
         }).then(res => {
-            resolve(res.data)
+            resolve(res.data);
         }).catch(err => {
-            reject(err)
-        })
-    })
+            reject(err);
+        });
+    });
 }

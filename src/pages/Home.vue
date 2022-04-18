@@ -18,11 +18,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, toRefs, computed, ref, reactive, onMounted } from 'vue';
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import TemplateList from '../components/TemplateList.vue';
-import { GlobalDataProps } from '../store/index';
+import TemplateList from '@/components/TemplateList.vue';
+import { GlobalDataProps } from '@/store/index';
 export default defineComponent({
   name: 'Index',
   components: {

@@ -31,9 +31,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
-import Uploader from '../components/Uploader.vue';
-import { GlobalDataProps } from '../store/index';
-import userCUrrentInstance from '../utils/useCurrentInstance';
+import Uploader from '@/components/Uploader.vue';
+import { GlobalDataProps } from '@/store/index';
+import userCUrrentInstance from '@/utils/useCurrentInstance';
 
 export default defineComponent({
   components: {

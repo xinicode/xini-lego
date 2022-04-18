@@ -3,12 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/typescript/recommended',
-    'prettier',
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   plugins: ['@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-explicit-any': 0,
@@ -43,7 +38,8 @@ module.exports = {
     'no-sparse-arrays': 2,
     'no-unreachable': 2,
     'no-unused-expressions': 2,
-    'no-unused-vars': [1, { vars: 'all', args: 'after-used' }],
+    'no-unused-vars': [0, { vars: 'all', args: 'after-used' }],
+    '@typescript-eslint/no-unused-vars': ['error'],
     'no-use-before-define': 2,
     'no-extra-boolean-cast': 2,
     'no-void': 2,

@@ -1,9 +1,8 @@
 
 
-
-export default class  CommonService  {
+export default class CommonService {
 
     getList(){
-        return 'aaaaaa'
+        return 'aaaaaa';
     }
 }
