@@ -15,7 +15,7 @@ module.exports = {
   indexPath: 'index.html',
 
   // 在保存后 eslint 检查代码。将值设置为'error'是把错误直接输出为编译错误。process.env.NODE_ENV !== 'production'，在生产环境上设为false
-  lintOnSave: true,
+  lintOnSave: false,
 
   // 文件名hash
   filenameHashing: true,

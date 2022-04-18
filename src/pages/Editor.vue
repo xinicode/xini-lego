@@ -29,47 +29,46 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 import Uploader from '@/components/Uploader.vue';
 import { GlobalDataProps } from '@/store/index';
-import userCUrrentInstance from '@/utils/useCurrentInstance';
-
+import Helper from '@/base/ya-helper';
+import $axios from '@/utils/request';
 export default defineComponent({
   components: {
     Uploader,
   },
   setup() {
-    const { proxy } = userCUrrentInstance();
     const text = ref<any>('this is test msg');
     const uploadDom = ref();
     const getRef = () => {
       const query = {
-        conStr: 'iaas',
-        filters: '',
-        orderby: 'createTime desc',
+        conStr: 'boss',
+        orderby: 'createdate desc',
         page: 1,
         page_size: 10,
-        params: { content: '', custId: '' },
-        rawfilters: {},
-        searchParams: {},
-        sqlId: 'iaasVpcPeeringConnection.getListForCrossUserUserCanManageCustomer',
-        total: true,
+        params: {
+          classifyID: 'help_instance',
+          classifyIDPath: 'help_root,help_instance',
+          content: '',
+          isPublish: '',
+          serviceId: null,
+        },
+        sqlId: 'infoNews.getList',
       };
-      proxy.$axios.post('gateway/cmp-main-api/api/queryPageList', query).then((rs: any) => {
+      $axios.post('gateway/cmp-main-api/api/queryPageList', query).then((rs: any) => {
         const datas = rs.data;
         console.log(datas);
       });
     };
-    // emitter.on("on-change", (s) => {
-    //   text.value = s;
-    // });
     const cuihao = ref();
     const store = useStore<GlobalDataProps>();
-    const aaa = () => {
-      cuihao.value.triggerUpload();
-      console.log(cuihao);
-    };
+    onMounted(() => {
+      const t = Helper.makeAutoId();
+      console.log(t);
+    });
+    const aaa = () => {};
     // const list = computed(() => store.state.editor.components);
     const list: any = [];
     return {

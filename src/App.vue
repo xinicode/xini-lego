@@ -1,9 +1,8 @@
 <template>
   <div class="app-container">
-    <router-view />
+    <router-view></router-view>
   </div>
 </template>
-
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';

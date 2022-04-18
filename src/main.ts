@@ -6,14 +6,14 @@ import router from './router';
 import store from './store/index';
 import mitt from 'mitt';
 import api from './utils/api';
+import yaHelper from './base/ya-helper';
 import http from './utils/request';
 
 import '@/styles/index';
 
 const app = createApp(App);
 // app.config.productionTip = false;
-app.config.globalProperties.$url = api.url;
-app.config.globalProperties.$axios = http;
+app.config.globalProperties.$helper = yaHelper;
 app.use(Antd).use(router).use(store);
 app.mount('#app');
 export const emitter = mitt();

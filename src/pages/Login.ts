@@ -24,7 +24,7 @@ export default defineComponent({
       // }).catch((error: ValidateErrorEntity) => {
       //   console.log(error);
       // });
-      localStorage.setItem('USERTOKEN', 'bG9jYWw6NWU5NmQzYmMtYjlkYy00OWVlLWIxZGUtNzAwNWY5N2U5YzY4');
+      localStorage.setItem('USERTOKEN', 'bG9jYWw6YzA5OTUxZTctNWNlOC00YjJhLTllNzYtOTM5OTZjMTQ0YTMw');
       store.commit('login');
       router.push('/');
       console.log('a');
