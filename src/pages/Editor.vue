@@ -21,48 +21,33 @@
       </ul>
       <a-layout-sider width="300" style="background: #fff" class="settings-panel">
         组件属性
-        <Uploader ref="uploadDom" @on-change="getChild" />
-        父：<input type="text" v-model="text" />
+        <Uploader ref="uploadDom" @change="getChild" />
+        父：<input type="text" @change="getText" v-model="text" />
         <a-button @click="getRef">ref获取子组件</a-button>
+        <h1>{{ userInfo.test }}</h1>
       </a-layout-sider>
     </a-layout>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
-import { useStore } from 'vuex';
+import Helper from '@/base/ya-helper';
 import Uploader from '@/components/Uploader.vue';
 import { GlobalDataProps } from '@/store/index';
-import Helper from '@/base/ya-helper';
 import $axios from '@/utils/request';
+import _ from 'lodash';
+import { defineComponent, onMounted, ref, watch } from 'vue';
+import { useStore } from 'vuex';
 export default defineComponent({
   components: {
     Uploader,
   },
   setup() {
-    const text = ref<any>('this is test msg');
+    const text = ref<any>('T');
+    const text2 = ref<any>('');
+    const userInfo = ref({
+      test: '123',
+    });
     const uploadDom = ref();
-    const getRef = () => {
-      const query = {
-        conStr: 'boss',
-        orderby: 'createdate desc',
-        page: 1,
-        page_size: 10,
-        params: {
-          classifyID: 'help_instance',
-          classifyIDPath: 'help_root,help_instance',
-          content: '',
-          isPublish: '',
-          serviceId: null,
-        },
-        sqlId: 'infoNews.getList',
-      };
-      $axios.post('gateway/cmp-main-api/api/queryPageList', query).then((rs: any) => {
-        const datas = rs.data;
-        console.log(datas);
-      });
-    };
-    const cuihao = ref();
     const store = useStore<GlobalDataProps>();
     onMounted(() => {
       const t = Helper.makeAutoId();
@@ -74,10 +59,10 @@ export default defineComponent({
     return {
       store,
       aaa,
+      userInfo,
       list,
-      cuihao,
       text,
-      getRef,
+      text2,
       uploadDom,
     };
   },
