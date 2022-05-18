@@ -4,7 +4,7 @@
       <a-col :span="12" class="aside">
         <div class="aside-inner">
           <router-link to="/">
-            <img alt="细腻lego" src="@/assets/img.png" class="logo-img" />
+            <img alt="细腻lego" src="@assets/img.png" class="logo-img" />
           </router-link>
           <h2>工具</h2>
           <span class="text-white-70">test</span>
@@ -40,7 +40,39 @@
     </a-row>
   </div>
 </template>
-<script src="./Login.ts" />
+<script setup lang="ts">
+import router from '@/router';
+import { onMounted, reactive, ref } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore();
+const formRef = ref();
+const formState = reactive({
+  cellphone: '1',
+  cellphone2: '2',
+});
+onMounted(() => {
+  console.log(formState);
+});
+const login = () => {
+  // console.log(formState);
+  // formRef.value.validate().then(() => {
+  //   console.log(toRaw(formState));
+  // }).catch((error: ValidateErrorEntity) => {
+  //   console.log(error);
+  // });
+  localStorage.setItem('USERTOKEN', 'bG9jYWw6YzA5OTUxZTctNWNlOC00YjJhLTllNzYtOTM5OTZjMTQ0YTMw');
+  store.commit('login');
+  router.push('/');
+};
+const resetForm = () => {
+  formRef.value.resetFields();
+};
+const rules = {
+  cellphone: [{ required: true, message: '不能为空', trigger: 'blur' }],
+  cellphone2: [{ min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }],
+};
+</script>
+
 <style>
 .logo-area {
   position: absolute;

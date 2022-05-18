@@ -1,9 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Index from '@/pages/Index.vue';
-import Home from '@/pages/Home.vue';
-import TemplateDetail from '@/pages/TemplateDetail.vue';
-import Login from '@/pages/Login.vue';
-import Editor from '@/pages/Editor.vue';
+import Index from '@pages/Index.vue';
+import Home from '@pages/Home.vue';
+import TemplateDetail from '@pages/TemplateDetail.vue';
+import Login from '@pages/Login.vue';
+import Editor from '@pages/Editor.vue';
+import notFount from '@pages/notFount.vue';
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -49,6 +50,11 @@ const router = createRouter({
       },
       component: Editor,
       // component: () => import(/* webpackChunkName: "login" */ '../pages/Login.vue')
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: '404',
+      component: notFount,
     },
   ],
 });

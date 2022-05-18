@@ -35,10 +35,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'TemplateList',
   props: {
-    list: [],
+    list: {
+      type: Array,
+      required: true
+    }
   },
+  name: 'components-list',
   setup() {
     return {};
   },

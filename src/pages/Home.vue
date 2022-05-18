@@ -43,9 +43,7 @@ export default defineComponent({
       console.log('cuihao');
       // isLoading.value = true;
     };
-    onMounted(() => {
-      console.log('cuihao');
-    });
+    onMounted(() => {});
     return {
       msg,
       isLastPage,

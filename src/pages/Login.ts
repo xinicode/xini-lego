@@ -30,7 +30,7 @@ export default defineComponent({
       console.log('a');
     };
     const resetForm = () => {
-      formRef.value.resetFields();
+    formRef.value.resetFields();
     };
     const rules = {
       cellphone: [{ required: true, message: '不能为空', trigger: 'blur' }],

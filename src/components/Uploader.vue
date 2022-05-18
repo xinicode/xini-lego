@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button @click="toTop">传给父</button>
     <div v-on="events">
       <slot v-if="isUploading" name="loading">
         <button disabled>正在上传</button>
@@ -18,42 +17,35 @@
         <button>点击上传</button>
       </slot>
     </div>
+    <input ref="fileInput" type="file" :style="{ display: 'none' }" @change="handelFileChange" />
     <ul>
-      <li v-for="file in uploadedFiles" :key="file.uuid">
+      <li v-for="file in filesList" :key="file.uuid">
+        <img style="width:100px;height:100px;" :src="file.url" :alt="file.name" />
         <span v-if="file.status === 'loading'" class="file-icon"><LoadingOutlined /></span>
+
         <span v-else class="file-icon"><FileOutlined /></span>
         <span class="filename">{{ file.name }}</span>
         <span class="delete-icon" @click="removeFile(file.uid)"><DeleteOutlined /></span>
       </li>
     </ul>
-    <input ref="fileInput" :style="{ display: 'none' }" type="file" @change="handelFileChange" />
   </div>
-  <h1>子：{{ st }}</h1>
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  reactive,
-  ref,
-  inject,
-  getCurrentInstance,
-  onMounted,
-} from 'vue';
+import { DeleteOutlined, FileOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import axios from 'axios';
-import { emitter } from '../main';
-import { DeleteOutlined, LoadingOutlined, FileOutlined } from '@ant-design/icons-vue';
-import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
-import { UploadFileStatus } from 'ant-design-vue/lib/upload/interface';
+import { v4 as uuidv4 } from 'uuid';
+import { computed, defineComponent, onMounted, PropType, reactive, ref } from 'vue';
 type UploadStatus = 'ready' | 'loading' | 'success' | 'error';
+type CheckUpload = (file: File) => boolean | Promise<File>;
 export interface UploadFile {
   uid: string;
   size: number;
   name: string;
   status: UploadStatus;
   raw: File;
+  url?: String;
   resp?: any;
 }
 export default defineComponent({
@@ -68,22 +60,19 @@ export default defineComponent({
       default: 'http://wwww.bbbb/ccc/upload',
       required: true,
     },
+    beforeUpload: {
+      type: Function as PropType<CheckUpload>,
+    },
   },
-  setup(props) {
-    const st: any = inject('cuihao');
-    const toTop = () => {
-      // emitter.emit("on-change", "from child111");
-      st.value = '123';
-    };
-    const uploadedFiles = ref<UploadFile[]>([]);
+  emits: ['success', 'error', 'change'],
+  setup(props, { emit }) {
     const fileInput = ref<null | HTMLInputElement>(null);
-    const fileStatus = ref<UploadStatus>('ready');
-
+    const filesList = ref<UploadFile[]>([]);
     const isUploading = computed(() => {
-      return uploadedFiles.value.some((file) => file.status === 'loading');
+      return filesList.value.some((file) => file.status === 'loading');
     });
     const lastFileData = computed(() => {
-      const lastFile = _.last(uploadedFiles.value);
+      const lastFile = _.last(filesList.value);
       if (lastFile) {
         return {
           loaded: lastFile.status === 'success',
@@ -98,7 +87,7 @@ export default defineComponent({
       }
     };
     const removeFile = (id: string) => {
-      uploadedFiles.value = uploadedFiles.value.filter((item) => {
+      filesList.value = filesList.value.filter((item) => {
         return item.uid !== id;
       });
     };
@@ -107,11 +96,27 @@ export default defineComponent({
     };
     const handelFileChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
-      const files = target.files;
+      beforeUploadCheck(target.files);
+    };
+    const beforeUploadCheck = (files: null | FileList) => {
       if (!files) return;
       const uploadedFile = files[0];
-      const formData = new FormData();
-      formData.append(uploadedFile.name, uploadedFile);
+      if (props.beforeUpload) {
+        const result = props.beforeUpload(uploadedFile);
+        if (result && result instanceof Promise) {
+          result.then((processedFile) => {
+            if (processedFile instanceof File) {
+              addFileToList(processedFile);
+            }
+          });
+        } else if (result === true) {
+          addFileToList(uploadedFile);
+        }
+      } else {
+        addFileToList(uploadedFile);
+      }
+    };
+    const addFileToList = (uploadedFile) => {
       const fileObj = reactive<UploadFile>({
         uid: uuidv4(),
         size: uploadedFile.size,
@@ -119,7 +124,30 @@ export default defineComponent({
         raw: uploadedFile,
         status: 'loading',
       });
-      uploadedFiles.value.push(fileObj);
+
+      try {
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(uploadedFile);
+        fileReader.onload = (res)=>{
+          fileObj.url = res.target?.result as String;
+          fileObj.status = 'success';
+        }
+        // fileObj.url = ;
+        // fileObj.url = URL.createObjectURL(uploadedFile);
+      } catch (error) {
+        console.error('error', error);
+      }
+
+      filesList.value.push(fileObj);
+      console.log("file: Uploader.vue ~ line 136 ~ filesList", filesList)
+      // postFile(fileObj);
+    };
+    const postFile = (readyFile: UploadFile) => {
+      emit('success', { ist: filesList.value });
+      return;
+      const formData = new FormData();
+      formData.append(readyFile.name, readyFile.raw);
+      readyFile.status = 'loading';
       axios
         .post(props.action, formData, {
           headers: {
@@ -127,11 +155,12 @@ export default defineComponent({
           },
         })
         .then((resp) => {
-          console.log(resp.data);
-          fileObj.status = 'success';
+          readyFile.status = 'success';
+          readyFile.resp = resp.data;
+          emit('success', { resp: resp.data, file: readyFile, list: filesList.value });
         })
-        .catch(() => {
-          fileObj.status = 'error';
+        .catch((err) => {
+          console.log(err);
         })
         .finally(() => {
           if (fileInput.value) {
@@ -147,14 +176,11 @@ export default defineComponent({
       triggerUpload,
       handelFileChange,
       fileInput,
-      uploadedFiles,
-      fileStatus,
+      filesList,
       isUploading,
       lastFileData,
       events,
       removeFile,
-      st,
-      toTop,
     };
   },
 });

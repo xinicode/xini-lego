@@ -41,7 +41,10 @@ module.exports = {
   chainWebpack: (config) => {
     // 是一个函数，会接收一个基于 webpack-chain 的 ChainableConfig 实例。允许对内部的 webpack 配置进行更细粒度的修改
     config.resolve.symlinks(true); // 修复热更新失效
-
+    config.resolve.alias // 添加别名
+      .set('@', resolve('src'))
+      .set('@assets', resolve('src/assets'))
+      .set('@pages', resolve('src/pages'));
     if (IS_PROD) {
       config
         .plugin('uglifyjs-plugin')
